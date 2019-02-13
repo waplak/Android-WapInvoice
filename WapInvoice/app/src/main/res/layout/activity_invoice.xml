@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/bg_login"
+    android:orientation="vertical" >
+    <LinearLayout
+        android:id="@+id/TableTitle"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="5dp"
+        android:background="@color/black">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:text="Invoice Details" />
+    </LinearLayout>
+
+        <ScrollView
+            android:id="@+id/scrollView1"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:fillViewport="true"
+            android:scrollbarFadeDuration="0"
+            android:scrollbarSize="5dp"
+            android:scrollbars="vertical" >
+
+            <LinearLayout
+                android:id="@+id/linearLayout2"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" >
+
+
+                <HorizontalScrollView
+                    android:id="@+id/horizontalScrollView1"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" >
+
+                    <TableLayout
+                        android:id="@+id/inqTradeSTable"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:layout_margin="2dp"
+                        android:layout_marginTop="5dp"
+                        android:stretchColumns="*" >
+                    </TableLayout>
+                </HorizontalScrollView>
+            </LinearLayout>
+        </ScrollView>
+    <TableLayout  android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/bg_login">
+        <TableRow
+            android:layout_marginTop="10pt"
+            android:gravity="center_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:text="Assign To :"
+                android:id="@+id/div"
+                android:layout_width="@dimen/IndiSpWithtextWidth"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textSize="@dimen/normalText"
+                android:layout_marginLeft="@dimen/margin_left"/>
+
+            <Spinner
+                android:id="@+id/spnAssign"
+                android:layout_width="@dimen/testIDSpinnerWidth"
+                android:layout_height="wrap_content"
+                android:background="@drawable/btn_dropdown"/>
+        </TableRow>
+
+    </TableLayout>
+    <TableLayout  android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/bg_login"
+        android:paddingBottom="5dp">
+        <!--<TableRow-->
+            <!--android:gravity="center_vertical"-->
+            <!--android:layout_marginTop="@dimen/margin_top"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content">-->
+
+            <!--<TextView-->
+                <!--android:layout_width="@dimen/IndiSpWithtextWidth"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginLeft="@dimen/margin_left"-->
+                <!--android:text="Total Discount:"-->
+                <!--android:textColor="@color/white"-->
+                <!--android:textSize="@dimen/normalText" />-->
+
+            <!--<EditText-->
+                <!--android:id="@+id/totDisc"-->
+                <!--android:layout_width="@dimen/editText"-->
+                <!--android:layout_height="35dp"-->
+                <!--android:layout_alignParentLeft="true"-->
+                <!--android:layout_alignParentTop="true"-->
+                <!--android:background="@drawable/edit_text"-->
+                <!--android:paddingLeft="5dp"-->
+                <!--android:inputType="numberDecimal"-->
+                <!--android:ems="10" />-->
+
+        <!--</TableRow>-->
+        <TableRow
+            android:gravity="center_vertical"
+            android:layout_marginTop="@dimen/margin_top"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="@dimen/IndiSpWithtextWidth"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_left"
+                android:text="Sub Total:"
+                android:textColor="@color/white"
+                android:textSize="@dimen/normalText" />
+
+            <EditText
+                android:id="@+id/subTot"
+                android:layout_width="@dimen/editText"
+                android:layout_height="35dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:textColor="@color/black"
+                android:enabled="false"
+                android:background="@drawable/edit_text"
+                android:paddingLeft="5dp"
+                android:inputType="numberDecimal"
+                android:ems="10" />
+            <TextView
+                android:layout_width="@dimen/IndiSpWithtextWidth"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginLeft="@dimen/margin_left"
+                android:text="Tax Total:"
+                android:textColor="@color/white"
+                android:textSize="@dimen/normalText" />
+
+            <EditText
+                android:id="@+id/taxTot"
+                android:layout_width="@dimen/rightEditText"
+                android:layout_height="35dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:textColor="@color/black"
+                android:enabled="false"
+                android:background="@drawable/edit_text"
+                android:paddingLeft="5dp"
+                android:inputType="numberDecimal"
+                android:ems="10" />
+        </TableRow>
+        <TableRow
+            android:gravity="center_vertical"
+            android:layout_marginTop="@dimen/margin_top"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="@dimen/IndiSpWithtextWidth"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_left"
+                android:text="Discount Total:"
+                android:textColor="@color/white"
+                android:textSize="@dimen/normalText" />
+
+            <EditText
+                android:id="@+id/discTot"
+                android:layout_width="@dimen/editText"
+                android:layout_height="35dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:textColor="@color/black"
+                android:enabled="false"
+                android:background="@drawable/edit_text"
+                android:paddingLeft="5dp"
+                android:inputType="numberDecimal"
+                android:ems="10" />
+            <TextView
+                android:layout_width="@dimen/IndiSpWithtextWidth"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginLeft="@dimen/margin_left"
+                android:text="Net Total:"
+                android:textColor="@color/white"
+                android:textSize="@dimen/normalText" />
+
+            <EditText
+                android:id="@+id/netTot"
+                android:layout_width="@dimen/rightEditText"
+                android:layout_height="35dp"
+                android:textColor="@color/black"
+                android:enabled="false"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:background="@drawable/edit_text"
+                android:paddingLeft="5dp"
+                android:inputType="numberDecimal"
+                android:ems="10" />
+        </TableRow>
+    </TableLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:layout_weight="20"
+        android:gravity="center"
+        android:background="@color/bg_login"
+        android:orientation="vertical" >
+
+        <Button
+            android:id="@+id/rest"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dip"
+            android:background="@color/green_500"
+            android:text="Rest"
+            android:textColor="@android:color/white" />
+
+        <Button
+            android:id="@+id/save"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dip"
+            android:background="@color/change_bt"
+            android:text="Save Invoice"
+            android:textColor="@android:color/white" />
+    </LinearLayout>
+    </LinearLayout>
