@@ -11,10 +11,11 @@
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="margin_left">4dp</dimen>
     <dimen name="margin_top">10dp</dimen>
-    <dimen name="logo_w">100dp</dimen>
-    <dimen name="logo_h">70dp</dimen>
+    <dimen name="logo_w">120dp</dimen>
+    <dimen name="logo_h">120dp</dimen>
     <dimen name="nav_header_vertical_spacing">8dp</dimen>
     <dimen name="nav_header_height">180dp</dimen>
+    <dimen name="bt_margin">20dp</dimen>
 
     <dimen name="testIDSpinnerWidth">310dp</dimen>
     <dimen name="popupSpinnerWidth">100dp</dimen>

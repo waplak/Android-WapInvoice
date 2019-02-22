@@ -204,8 +204,7 @@
     </TableLayout>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dip"
-        android:layout_weight="20"
+        android:layout_height="fill_parent"
         android:gravity="center"
         android:background="@color/bg_login"
         android:orientation="vertical" >
@@ -214,16 +213,16 @@
             android:id="@+id/rest"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="20dip"
+            android:layout_margin="@dimen/bt_margin"
             android:background="@color/green_500"
-            android:text="Rest"
+            android:text="Reset"
             android:textColor="@android:color/white" />
 
         <Button
             android:id="@+id/save"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="20dip"
+            android:layout_margin="@dimen/bt_margin"
             android:background="@color/change_bt"
             android:text="Save Invoice"
             android:textColor="@android:color/white" />

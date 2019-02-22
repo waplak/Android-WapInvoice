@@ -25,7 +25,7 @@ import static android.content.ContentValues.TAG;
 public class InvoiceFragment extends Fragment {
 
     public static String getTAG() {
-        return "Create Invoice";
+        return "Invoice";
     }
     private  ViewPager mViewPager;
     private Adapter viewPagerAdapter;
@@ -52,7 +52,7 @@ public class InvoiceFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         //you can set the title for your toolbar here for different fragments different titles
         setupViewPager(mViewPager);
-        getActivity().setTitle("Create Invoice");
+        getActivity().setTitle("Invoice");
     }
 
 

@@ -67,7 +67,7 @@ public class AddInvoiceFragment extends Fragment {
     private LinkedHashMap<String,String> itemCode;
     private double ItemByQty,disValue;
     private String Cat_base,Cat_code,Stock_code;
-
+    boolean isAvailable = true;
     Date c = Calendar.getInstance().getTime();
     SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
     private String [] remarkArray = {"CASH","21 days","30 days"};
@@ -177,29 +177,8 @@ public class AddInvoiceFragment extends Fragment {
                     quantity.setError("Please Enter Valid Quantity");
                     return;
                 }
-                DownloadedDataCenter.getInstance(getActivity()).setCustomer(custCode.get(autoCustomer.getText().toString()));
+                isQtyAvailable();
 
-                AddItem addItem = new AddItem();
-                addItem.setItem(DownloadedDataCenter.getInstance(getActivity()).getSelectedItemCode());
-                addItem.setUnit(selectedunit);
-                addItem.setsPrice(sPrice.getText().toString());
-                addItem.setcPrice(cPrice.getText().toString());
-                addItem.setQty(quantity.getText().toString());
-                addItem.setDiscount(disValue+"");
-                addItem.setCat_code(Cat_code);
-                addItem.setCat_base(Cat_base);
-                addItem.setStock_code(Stock_code);
-                //addItem.setBonus();
-                addItem.setTotValue(totValue.getText().toString());
-
-                DownloadedDataCenter.getInstance(getActivity()).setAddItemList(addItem);
-
-                quantity.setText("");
-                discount.setText("");
-                totValue.setText("");
-                bonus.setText("");
-                Toast.makeText(getActivity(), "Item Successfully Added",
-                        Toast.LENGTH_SHORT).show();
             }
         });
         quantity.addTextChangedListener(new TextWatcher() {
@@ -620,5 +599,74 @@ public class AddInvoiceFragment extends Fragment {
             }
         });
     }
+    private void isQtyAvailable(){
+        if(!dialog.isShowing()){
+            dialog = new ProgressDialog(
+                    getActivity(),ProgressDialog.THEME_HOLO_DARK);
+            this.dialog.setMessage("Checking Stock....");
+            this.dialog.setCanceledOnTouchOutside(false);
+            this.dialog.show();
+        }
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(AndroidUtill.COMMON_API)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        JsonPlaceHolderApi jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
+        Call<Boolean> call = jsonPlaceHolderApi.IsQuantityAvailable(DownloadedDataCenter.getInstance(getActivity()).getSelectedDivition(),
+                DownloadedDataCenter.getInstance(getActivity()).getSelectedItemCode(),quantity.getText().toString());
+        call.enqueue(new Callback<Boolean>() {
+            @Override
+            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                if(!response.isSuccessful()){
+                    if(dialog.isShowing()) {
+                        dialog.dismiss();
+                    }
+                    Toast.makeText(getActivity(),"Login Failed, Error Code:"+response.code(),Toast.LENGTH_LONG);
+                }else{
+                    if(response.body()){
+                        if(dialog.isShowing()) {
+                            dialog.dismiss();
+                        }
+                        DownloadedDataCenter.getInstance(getActivity()).setCustomer(custCode.get(autoCustomer.getText().toString()));
 
+                        AddItem addItem = new AddItem();
+                        addItem.setItem(DownloadedDataCenter.getInstance(getActivity()).getSelectedItemCode());
+                        addItem.setUnit(selectedunit);
+                        addItem.setsPrice(sPrice.getText().toString());
+                        addItem.setcPrice(cPrice.getText().toString());
+                        addItem.setQty(quantity.getText().toString());
+                        addItem.setDiscount(disValue+"");
+                        addItem.setCat_code(Cat_code);
+                        addItem.setCat_base(Cat_base);
+                        addItem.setStock_code(Stock_code);
+                        //addItem.setBonus();
+                        addItem.setTotValue(totValue.getText().toString());
+
+                        DownloadedDataCenter.getInstance(getActivity()).setAddItemList(addItem);
+
+                        quantity.setText("");
+                        discount.setText("");
+                        totValue.setText("");
+                        bonus.setText("");
+                        Toast.makeText(getActivity(), "Item Successfully Added",
+                                Toast.LENGTH_SHORT).show();
+                    }else{
+                        quantity.invalidate();
+                        quantity.setError("Entered Quantity not in Stock");
+                        if(dialog.isShowing()) {
+                            dialog.dismiss();
+                        }
+                        return;
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Boolean> call, Throwable t) {
+                if(dialog.isShowing()) {
+                    dialog.dismiss();
+                }
+            }
+        });
+    }
 }

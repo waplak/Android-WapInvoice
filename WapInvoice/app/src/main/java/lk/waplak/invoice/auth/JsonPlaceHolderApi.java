@@ -37,4 +37,7 @@ public interface JsonPlaceHolderApi {
 
     @POST("Invoice/SaveInvoice")
     Call <Boolean> SaveInvoice(@Body Invoice invoice);
+
+    @GET("Invoice/IsQuantityAvailable")
+    Call<Boolean> IsQuantityAvailable(@Query("storeCode")String divCode,@Query("itemCode")String itemCode,@Query("itemQty")String itemQty);
 }
