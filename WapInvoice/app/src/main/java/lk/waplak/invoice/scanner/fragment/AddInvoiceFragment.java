@@ -60,12 +60,12 @@ public class AddInvoiceFragment extends Fragment {
     private int month;
     private int dayOfMonth;
     private Calendar calendar;
-    private EditText date,inStock,sPrice,cPrice,quantity,totValue,discount,bonus;
+    private EditText date,inStock,sPrice,quantity,totValue,discount;
     private Button addButton,nextButton;
     private ProgressDialog dialog ;
     private LinkedHashMap<String,String> custCode;
     private LinkedHashMap<String,String> itemCode;
-    private double ItemByQty,disValue;
+    private double ItemByQty,disValue,cPriced;
     private String Cat_base,Cat_code,Stock_code;
     boolean isAvailable = true;
     Date c = Calendar.getInstance().getTime();
@@ -89,13 +89,13 @@ public class AddInvoiceFragment extends Fragment {
         date = rootView.findViewById(R.id.date);
         inStock = rootView.findViewById(R.id.inStock);
         sPrice = rootView.findViewById(R.id.sPrice);
-        cPrice = rootView.findViewById(R.id.cPrice);
+        //cPrice = rootView.findViewById(R.id.cPrice);
         quantity = rootView.findViewById(R.id.quantity);
         addButton = rootView.findViewById(R.id.btn_add);
         nextButton = rootView.findViewById(R.id.btn_next);
         totValue = rootView.findViewById(R.id.totValue);
         discount= rootView.findViewById(R.id.discount);
-        bonus = rootView.findViewById(R.id.bonus);
+       // bonus = rootView.findViewById(R.id.bonus);
         if(!DownloadedDataCenter.getInstance(getActivity()).isActive()) {
             String currentDate = df.format(c);
             date.setText(currentDate);
@@ -540,7 +540,8 @@ public class AddInvoiceFragment extends Fragment {
         if(DownloadedDataCenter.getInstance(getActivity()).getSelectedItemCode()==null){
             inStock.setText("0.00");
             sPrice.setText("0.00");
-            cPrice.setText("0.00");
+           // cPrice.setText("0.00");
+            cPriced = 0.00;
             if(dialog.isShowing()) {
                 dialog.dismiss();
             }
@@ -568,19 +569,22 @@ public class AddInvoiceFragment extends Fragment {
                         if(crnt!=null) {
                             inStock.setText(crnt.getQty_inhand()+"");
                             sPrice.setText(df2.format(crnt.getItem_P_Whole()));
-                            cPrice.setText(df2.format(crnt.getItem_P_Cost()));
+                            //cPrice.setText(df2.format(crnt.getItem_P_Cost()));
+                            cPriced = crnt.getItem_P_Cost();
                             Cat_base =crnt.getCat_base();
                             Cat_code = crnt.getCat_code();
                             Stock_code = crnt.getStock_code();
                         }else{
                             inStock.setText("0.00");
                             sPrice.setText("0.00");
-                            cPrice.setText("0.00");
+                            //cPrice.setText("0.00");
+                            cPriced = 0;
                         }
                     }else{
                         inStock.setText("0.00");
                         sPrice.setText("0.00");
-                        cPrice.setText("0.00");
+                        //cPrice.setText("0.00");
+                        cPriced =0;
                     }
 
                     if(dialog.isShowing()) {
@@ -633,7 +637,7 @@ public class AddInvoiceFragment extends Fragment {
                         addItem.setItem(DownloadedDataCenter.getInstance(getActivity()).getSelectedItemCode());
                         addItem.setUnit(selectedunit);
                         addItem.setsPrice(sPrice.getText().toString());
-                        addItem.setcPrice(cPrice.getText().toString());
+                        addItem.setcPrice(cPriced+"");
                         addItem.setQty(quantity.getText().toString());
                         addItem.setDiscount(disValue+"");
                         addItem.setCat_code(Cat_code);
@@ -647,7 +651,7 @@ public class AddInvoiceFragment extends Fragment {
                         quantity.setText("");
                         discount.setText("");
                         totValue.setText("");
-                        bonus.setText("");
+                        //bonus.setText("");
                         Toast.makeText(getActivity(), "Item Successfully Added",
                                 Toast.LENGTH_SHORT).show();
                     }else{
